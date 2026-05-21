@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class Conexao {
 
-    private static final String URL = "jdbc:mysql://localhost:3307/sinalizaai_db";
-    private static final String USER = "root";
-    private static final String PASSWORD = "MySQL@2022";
+    private static final String URL = System.getenv("DB_URL");
+    private static final String USER = System.getenv("DB_USER");
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
     public static Connection getConexao() {
         try {
