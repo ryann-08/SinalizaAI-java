@@ -119,6 +119,10 @@ CREATE TABLE `logs_uso` (
   PRIMARY KEY (`id`),
   KEY `sinal_id` (`sinal_id`),
   KEY `usuario_id` (`usuario_id`),
+  KEY `fk_logs_atendente` (`atendente_id`),
+  KEY `fk_logs_intencao` (`intencao_id`),
+  CONSTRAINT `fk_logs_atendente` FOREIGN KEY (`atendente_id`) REFERENCES `atendentes` (`id`),
+  CONSTRAINT `fk_logs_intencao` FOREIGN KEY (`intencao_id`) REFERENCES `intencoes` (`id`),
   CONSTRAINT `logs_uso_ibfk_1` FOREIGN KEY (`sinal_id`) REFERENCES `sinais` (`id`),
   CONSTRAINT `logs_uso_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios_adm` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -257,4 +261,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-03  0:00:10
+-- Dump completed on 2026-06-03  8:49:06
