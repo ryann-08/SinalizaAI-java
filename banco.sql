@@ -101,6 +101,32 @@ LOCK TABLES `intencoes` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `logs_sinais`
+--
+
+DROP TABLE IF EXISTS `logs_sinais`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `logs_sinais` (
+  `log_id` int NOT NULL,
+  `sinal_id` int NOT NULL,
+  PRIMARY KEY (`log_id`,`sinal_id`),
+  KEY `sinal_id` (`sinal_id`),
+  CONSTRAINT `logs_sinais_ibfk_1` FOREIGN KEY (`log_id`) REFERENCES `logs_uso` (`id`),
+  CONSTRAINT `logs_sinais_ibfk_2` FOREIGN KEY (`sinal_id`) REFERENCES `sinais` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logs_sinais`
+--
+
+LOCK TABLES `logs_sinais` WRITE;
+/*!40000 ALTER TABLE `logs_sinais` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logs_sinais` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `logs_uso`
 --
 
@@ -225,6 +251,32 @@ INSERT INTO `sinais` VALUES (1,'AGUA','Substantivo',1,'2026-05-15 18:40:44','202
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sinais_intencoes`
+--
+
+DROP TABLE IF EXISTS `sinais_intencoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sinais_intencoes` (
+  `sinal_id` int NOT NULL,
+  `intencao_id` int NOT NULL,
+  PRIMARY KEY (`sinal_id`,`intencao_id`),
+  KEY `intencao_id` (`intencao_id`),
+  CONSTRAINT `sinais_intencoes_ibfk_1` FOREIGN KEY (`sinal_id`) REFERENCES `sinais` (`id`),
+  CONSTRAINT `sinais_intencoes_ibfk_2` FOREIGN KEY (`intencao_id`) REFERENCES `intencoes` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sinais_intencoes`
+--
+
+LOCK TABLES `sinais_intencoes` WRITE;
+/*!40000 ALTER TABLE `sinais_intencoes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sinais_intencoes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuarios_adm`
 --
 
@@ -261,4 +313,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-03  8:49:06
+-- Dump completed on 2026-06-04  0:45:53
