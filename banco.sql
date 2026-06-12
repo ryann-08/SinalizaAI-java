@@ -36,71 +36,6 @@ CREATE TABLE `amostras_dataset` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `amostras_dataset`
---
-
-LOCK TABLES `amostras_dataset` WRITE;
-/*!40000 ALTER TABLE `amostras_dataset` DISABLE KEYS */;
-/*!40000 ALTER TABLE `amostras_dataset` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `atendentes`
---
-
-DROP TABLE IF EXISTS `atendentes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `atendentes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `cargo` varchar(100) NOT NULL,
-  `ativo` tinyint(1) DEFAULT '1',
-  `criado_em` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `atendentes`
---
-
-LOCK TABLES `atendentes` WRITE;
-/*!40000 ALTER TABLE `atendentes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `atendentes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `intencoes`
---
-
-DROP TABLE IF EXISTS `intencoes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `intencoes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(100) NOT NULL,
-  `descricao` text NOT NULL,
-  `sinal_id` int NOT NULL,
-  `criado_em` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `sinal_id` (`sinal_id`),
-  CONSTRAINT `intencoes_ibfk_1` FOREIGN KEY (`sinal_id`) REFERENCES `sinais` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `intencoes`
---
-
-LOCK TABLES `intencoes` WRITE;
-/*!40000 ALTER TABLE `intencoes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `intencoes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `logs_sinais`
 --
 
@@ -116,15 +51,6 @@ CREATE TABLE `logs_sinais` (
   CONSTRAINT `logs_sinais_ibfk_2` FOREIGN KEY (`sinal_id`) REFERENCES `sinais` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `logs_sinais`
---
-
-LOCK TABLES `logs_sinais` WRITE;
-/*!40000 ALTER TABLE `logs_sinais` DISABLE KEYS */;
-/*!40000 ALTER TABLE `logs_sinais` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `logs_uso`
@@ -155,15 +81,6 @@ CREATE TABLE `logs_uso` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `logs_uso`
---
-
-LOCK TABLES `logs_uso` WRITE;
-/*!40000 ALTER TABLE `logs_uso` DISABLE KEYS */;
-/*!40000 ALTER TABLE `logs_uso` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `modelos_treinados`
 --
 
@@ -184,45 +101,6 @@ CREATE TABLE `modelos_treinados` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `modelos_treinados`
---
-
-LOCK TABLES `modelos_treinados` WRITE;
-/*!40000 ALTER TABLE `modelos_treinados` DISABLE KEYS */;
-/*!40000 ALTER TABLE `modelos_treinados` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `respostas`
---
-
-DROP TABLE IF EXISTS `respostas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `respostas` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `intencao_id` int NOT NULL,
-  `texto_resposta` text NOT NULL,
-  `glosa` varchar(255) DEFAULT NULL,
-  `arquivo_avatar` varchar(255) DEFAULT NULL,
-  `criado_em` datetime DEFAULT CURRENT_TIMESTAMP,
-  `atualizado_em` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `intencao_id` (`intencao_id`),
-  CONSTRAINT `respostas_ibfk_1` FOREIGN KEY (`intencao_id`) REFERENCES `intencoes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `respostas`
---
-
-LOCK TABLES `respostas` WRITE;
-/*!40000 ALTER TABLE `respostas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `respostas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `sinais`
 --
 
@@ -239,42 +117,6 @@ CREATE TABLE `sinais` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sinais`
---
-
-LOCK TABLES `sinais` WRITE;
-/*!40000 ALTER TABLE `sinais` DISABLE KEYS */;
-INSERT INTO `sinais` VALUES (1,'AGUA','Substantivo',1,'2026-05-15 18:40:44','2026-06-02 23:34:54');
-/*!40000 ALTER TABLE `sinais` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sinais_intencoes`
---
-
-DROP TABLE IF EXISTS `sinais_intencoes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sinais_intencoes` (
-  `sinal_id` int NOT NULL,
-  `intencao_id` int NOT NULL,
-  PRIMARY KEY (`sinal_id`,`intencao_id`),
-  KEY `intencao_id` (`intencao_id`),
-  CONSTRAINT `sinais_intencoes_ibfk_1` FOREIGN KEY (`sinal_id`) REFERENCES `sinais` (`id`),
-  CONSTRAINT `sinais_intencoes_ibfk_2` FOREIGN KEY (`intencao_id`) REFERENCES `intencoes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sinais_intencoes`
---
-
-LOCK TABLES `sinais_intencoes` WRITE;
-/*!40000 ALTER TABLE `sinais_intencoes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sinais_intencoes` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `usuarios_adm`
@@ -294,15 +136,6 @@ CREATE TABLE `usuarios_adm` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuarios_adm`
---
-
-LOCK TABLES `usuarios_adm` WRITE;
-/*!40000 ALTER TABLE `usuarios_adm` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuarios_adm` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -313,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-04  0:45:53
+-- Dump completed on 2026-06-11 23:24:23
